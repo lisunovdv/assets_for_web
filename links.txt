@@ -1,0 +1,1 @@
+Большой список CSS-стилей для SVG: http://www.opera.com/docs/specs/presto25/svg/cssproperties/

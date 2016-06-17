@@ -33,5 +33,15 @@ $('head').append('<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/
 });</script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!-- Right Clearfix Hack by Nicolas Gallagher (http://nicolasgallagher.com/micro-clearfix-hack/ -->
+<style>
+  .container::before, .container::after {
+    content:"";
+    display:table;
+}
+.container::after {
+    clear:both;
+}
+</style>
 </body>
 </html>

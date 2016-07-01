@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="content_left js-content_left">
+          <div class="tabs">
+    <ul class="tabs-menu tabs-menu_habrahabr">
+          <li class="tabs-menu__item tabs-menu__item_user-profile tabs-menu__item_inline">
+            <a href="https://habrahabr.ru/users/psywalker/" class="tab-item tab-item_stacked ">
+              <span class="tab-item__value stats">
+                <span class="stats__counters stats__counters_big">
+                  <strong class="counter"></strong>
+                </span>
+                <span class="stats__value">Профиль</span>
+            </span></a>
+          </li>
+          <li class="tabs-menu__item tabs-menu__item_user-profile tabs-menu__item_inline">
+            <a href="https://habrahabr.ru/users/psywalker/topics/" class="tab-item tab-item_stacked tab-item_current">
+              <span class="tab-item__value stats">
+                <span class="stats__counters stats__counters_big">
+                  <strong class="counter">9</strong>
+                </span>
+                <span class="stats__value">Публикации</span>
+            </span></a>
+          </li>
+          <li class="tabs-menu__item tabs-menu__item_user-profile tabs-menu__item_inline">
+            <a href="https://habrahabr.ru/users/psywalker/comments/" class="tab-item tab-item_stacked ">
+              <span class="tab-item__value stats">
+                <span class="stats__counters stats__counters_big">
+                  <strong class="counter">175</strong>
+                </span>
+                <span class="stats__value">Комментарии</span>
+            </span></a>
+          </li>
+          <li class="tabs-menu__item tabs-menu__item_user-profile tabs-menu__item_inline">
+            <a href="https://habrahabr.ru/users/psywalker/favorites/" class="tab-item tab-item_stacked ">
+              <span class="tab-item__value stats">
+                <span class="stats__counters stats__counters_big">
+                  <strong class="counter">1</strong>
+                </span>
+                <span class="stats__value">Избранное</span>
+            </span></a>
+          </li>
+          <li class="tabs-menu__item tabs-menu__item_user-profile tabs-menu__item_inline">
+            <a href="https://habrahabr.ru/users/psywalker/subscription/followers/" class="tab-item tab-item_stacked ">
+              <span class="tab-item__value stats">
+                <span class="stats__counters stats__counters_big">
+                  <strong class="counter">30</strong>
+                </span>
+                <span class="stats__value">Подписчики</span>
+            </span></a>
+          </li>
+    </ul>
+
+  </div>
+
+
+        <div class="post_show">
+          
+    <div class="post post_full" id="post_303174">
+  <div class="post__header">
+    <span class="post__time_published">13 июня в 21:54</span>
+
+    <h1 class="post__title">
+      <a href="https://habrahabr.ru/flows/develop/" class="post__flow" onclick="if (typeof ga === 'function') { ga('send', 'event', 'flow', 'post page', 'Разработка'); }">Разработка</a><span class="post__title-arrow">&nbsp;→</span>
+      <span>Как называть css-классы</span>
+      
+
+<span class="flag flag_translation" title="Перевод">перевод</span>
+
+
+
+
+
+
+    </h1>
+
+      <div class="hubs">
+          <a href="https://habrahabr.ru/hub/webdev/" class="hub " title="Вы не подписаны на этот хаб" onclick="if (typeof ga === 'function') { ga('send', 'event', 'hub', 'post page', 'Разработка веб-сайтов'); }">Разработка веб-сайтов</a><span class="profiled_hub" title="Профильный хаб">*</span>, 
+          <a href="https://habrahabr.ru/hub/html5/" class="hub " title="Вы не подписаны на этот хаб" onclick="if (typeof ga === 'function') { ga('send', 'event', 'hub', 'post page', 'HTML'); }">HTML</a><span class="profiled_hub" title="Профильный хаб">*</span>, 
+          <a href="https://habrahabr.ru/hub/css/" class="hub " title="Вы не подписаны на этот хаб" onclick="if (typeof ga === 'function') { ga('send', 'event', 'hub', 'post page', 'CSS'); }">CSS</a><span class="profiled_hub" title="Профильный хаб">*</span>
+      </div>
+  </div>
+
+  <div class="post__body post__body_full">
+    <div class="content html_format">Основываясь на моих любимых статьях по данной теме и личном опыте, вот мои 5 копеек о том, как называть CSS-классы.<br>
+<br>
+<h2>0. Прежде чем думать о названии класса, выберите подходящее название для HTML-элементов</h2><br>
+<br>
+Если это поле, используйте элемент <code>input</code><br>
+<br>
+Читать HTML-документ будет гораздо легче.<br>
+<br>
+<strong>Пример:</strong><br>
+<br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'submit'</span>/&gt;</span> <span class="hljs-comment">&lt;!-- Чёёё? --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'submit'</span>/&gt;</span> <span class="hljs-comment">&lt;!-- Аа, ясно --&gt;</span>
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="https://blog.goetter.fr/2014/11/10/bien-utiliser-un-framework-css/">Рафаэль Гоитер (французская статья)</a><br>
+<a name="habracut"></a><br>
+<br>
+<h2>1. Назначайте классы как можно ниже по DOM-дереву</h2><br>
+<br>
+Это сказывается на названии классов. Всегда пишите название класса прямо в HTML-элементе, для которого нужно оформление, даже если на это приходится потратить дополнительные усилия. Если не ясно почему, почитайте нижеприведённую статью Криса Койера. <br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'mainly'</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Lorem ipsum<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span> <span class="hljs-comment">&lt;!-- Я хотел бы застилизовать этот абзац --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+</code></pre><br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.mainly</span> <span class="hljs-selector-tag">p</span> { <span class="hljs-comment">/* Не делайте этого */</span>
+}
+
+<span class="hljs-comment">/* Вместо этого присвойте название класса p : &lt;p class='paragraphly' /&gt; */</span>
+<span class="hljs-selector-class">.paragraphly</span> {
+}
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="https://css-tricks.com/strategies-keeping-css-specificity-low/#article-header-id-3">Крис Койер</a><br>
+<br>
+<h2>2. Называйте классы по содержимому</h2><br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.c-header-logo</span> {
+  <span class="hljs-comment">/* Просто прочитав это название, я догадался, что этот селектор указывает на лого в шапке. */</span>
+}
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="http://www.phpied.com/css-coding-conventions/">phpied.com</a><br>
+<br>
+<h2>3. Не называйте класс по содержимому, если картинка нагляднее</h2><br>
+<br>
+Скажем, лого шапки на самом деле выглядит так:<br>
+<img src="https://habrastorage.org/getpro/habr/post_images/d3f/de9/b01/d3fde9b01b9d7732a0adcc183705a924.png" alt="image"><br>
+<br>
+Тогда не называйте его header-logo.<br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.guillotine</span> {
+  <span class="hljs-comment">/* О, сразу видно, что мы хотим стилизовать */</span>
+}
+</code></pre><br>
+<br>
+<h2>4. Попробуйте суффикс <code>-like</code> для лучшей переносимости кода.</h2><br>
+<br>
+Пример:<br>
+<pre><code class="css hljs"><span class="hljs-selector-tag">h3</span>, <span class="hljs-selector-class">.h3-like</span> {
+<span class="hljs-comment">/* какое-то оформление */</span>
+}
+</code></pre><br>
+<pre><code class="css hljs">&lt;<span class="hljs-selector-tag">p</span> <span class="hljs-selector-tag">class</span>='<span class="hljs-selector-tag">h3-like</span>'&gt;
+  &lt;!<span class="hljs-selector-tag">--</span> Я НЕ заголовок <span class="hljs-selector-tag">h3</span>, но поскольку дизайнер велел мне выглядеть так же,
+      я не могу жаловаться на своё название класса <span class="hljs-selector-tag">--</span>&gt;
+&lt;/<span class="hljs-selector-tag">p</span>&gt;
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="http://bit.ly/27GQhS6">KNACSS v4</a><br>
+<br>
+<h2>5. Не используйте верблюжийРегистр</h2><br>
+<br>
+Это затрудняет чтение<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.navToOneModuleICreated</span> {
+  <span class="hljs-attribute">font-size</span>:<span class="hljs-number">2em</span>;
+}
+<span class="hljs-comment">/* против */</span>
+<span class="hljs-selector-class">.nav-to-one-module-i-created</span> {
+  <span class="hljs-attribute">font-size</span>:<span class="hljs-number">2em</span>;
+}
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="http://csswizardry.com/2010/12/css-camel-case-seriously-sucks/">Гарри Робертс</a><br>
+<br>
+<h2>6. Пробуйте БЭМ</h2><br>
+<br>
+На сегодняшний день это одно из самых популярных соглашений.<br>
+<br>
+<ul>
+<li>Поначалу он кажется странным, но не бойтесь.</li>
+<li>Порог вхождения очень низкий</li>
+<li>Можно использовать его уже сейчас в любой части проекта.</li>
+<li>Долгосрочные перспективы колоссальны</li>
+</ul><br>
+<br>
+(двойной дефис) означает вариант элемента.<br>
+<br>
+(двойное подчёркивание) означает дочерний элемент.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'btn btn--warning'</span>&gt;</span> <span class="hljs-comment">&lt;!-- oдин из вариантов .btn — .btn--warning --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'btn__text'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span> <span class="hljs-comment">&lt;!-- один из дочерних элементов .btn — .btn__text--&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre><br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.btn--warning</span> {
+<span class="hljs-comment">/* Ура! По соглашению я знаю, что код относится к варианту кнопки «warning», даже не заглядывая в HTML-код. Какое облегчение! */</span>
+}
+<span class="hljs-selector-class">.btn__text</span> {
+<span class="hljs-comment">/* По той же причине я знаю, что эти стили предназначаются для текста в кнопке */</span>
+}
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="http://blog.kaelig.fr/post/48196348743/fifty-shades-of-bem">Калиг, пятьдесят оттенков БЭМ</a><br>
+<br>
+<strong>Рекомендовано:</strong> <a href="https://www.smashingmagazine.com/2016/06/battling-bem-extended-edition-common-problems-and-how-to-avoid-them/">Smashing Magazine, боремся с БЭМ</a><br>
+<br>
+<h2>7. Пробуйте ещё страшнее</h2><br>
+<br>
+БЭМ открывает новые возможности, даже если поначалу их соглашения выглядят мерзко.<br>
+<br>
+Тем не менее, такая своеобразность помогает глазу моментально уловить суть происходящего, и в случае БЭМ, поверьте, это работает.<br>
+<br>
+Теперь можете пробовать более мерзкое соглашение, пока вы придерживаетесь его на всём проекте.<br>
+<br>
+<strong>Пример:</strong><br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.DIMENSIONS_OF_mycomponent</span> {
+  <span class="hljs-comment">/* Куда ещё противнее. Зато теперь понятнее, о чём речь. */</span>
+  <span class="hljs-comment">/* Я использую его для классов-заготовок в SASS. */</span>
+  <span class="hljs-comment">/* Но всё же не злоупотребляйте этим правилом. */</span>
+}
+</code></pre><br>
+<br>
+<h2>8. Не сокращайте описывающие слова</h2><br>
+<br>
+Помимо уже устоявшихся <code>nav</code>, <code>txt</code>, <code>url</code>… следует избегать любых аббревиатур.<br>
+<br>
+<strong>Источник:</strong> <a href="http://www.phpied.com/css-coding-conventions/">phpied.com</a><br>
+<br>
+<h2>9. Пробуйте использовать только одну букву в качестве осмысленного префикса</h2><br>
+<br>
+В случае визуального компонента начинайте с <code>c-</code>, а в случае объекта (напр. макет) — с <code>o-</code>, мне просто нравится этот трюк Гарри Робертса.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'o-layout'</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'o-layout-item o-grid c-button'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- С первого взгляда на HTML видно, что за что отвечает.-&gt;
+&lt;/button&gt;
+</span></code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="http://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/">Гарри Робертс</a><br>
+<br>
+<h2>10. Пробуйте <code>[]</code>, когда слишком много классов одного типа</h2><br>
+<br>
+Этот небольшой трюк помогает быстрее изучить HTML. Заметьте, в CSS-файле нет классов <code>.[</code> и <code>.]</code>, они нужны только здесь, чтобы помочь другим читать HTML.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'[ o-layout ]'</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'[ o-layout-item o-layout-item--first ] c-button'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- С первого взгляда на HTML видно, что за что отвечает.--&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="https://raw.githubusercontent.com/csshugs/inuit-kitchen-sink/v0.4.0/layout.html">исходный код «Inuit Kitchen Sink»</a><br>
+<br>
+<h2>11. Используйте префикс <code>js-</code>, если он используется только для JavaScript</h2><br>
+<br>
+Если Javascript требуется выбрать элемент, не полагайтесь на CSS-стили. Задайте специальный префикс вроде <code>js-</code>.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'js-click-me'</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- При беглом просмотре HTML я понимаю, что у этой кнопки нет CSS-селектора для оформления.
+       Но JavaScript использует её, видимо, чтобы поймать какое-то событие. --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="https://leanpub.com/marionette-gentle-introduction">Дерик Бейли, книга по marionnette.js</a><br>
+<br>
+<h2>12. Старайтесь отделить родительский элемент от дочернего</h2><br>
+<br>
+Если у класса слишком много обязанностей, разделите его на 2 отдельных свойства.<br>
+<br>
+<strong>Пример:</strong><br>
+<br>
+(плохо)<br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'a'</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- Этот класс ниже включает сочетание свойств,
+       некоторые из которых участвуют в отношении a-b,
+       а некоторые — в отношении b-c,
+       CSS-файл будет трудно читать.--&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'child-of-a-and-parent-of-c'</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'c'</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre><br>
+<br>
+(хорошо)<br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'a'</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- Разделите на 2 класса--&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'child-of-a parent-of-c'</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'c'</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre><br>
+<br>
+<h2>13. Несемантические классы должны явно описывать свои свойства.</h2><br>
+<br>
+Большинство из них содержат только одно свойство, и незачем его скрывать.<br>
+<br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.horizontal-alignment</span> { <span class="hljs-comment">/* Не делайте этого. Выровнять по горизонтали можно разными способами, но при виде этого селектора в HTML-файле совершенно не ясно, КАК ИМЕННО это сделано. */</span>
+  <span class="hljs-attribute">text-align</span>: center;
+}
+<span class="hljs-comment">/* Предпочитайте этот способ. Смотрите выше про использование БЭМ и односимвольного префикса */</span>
+<span class="hljs-selector-class">.u-text-align--center</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+}
+</code></pre><br>
+<br>
+<h2>14. Явные хаки (I)</h2><br>
+<br>
+Если вы не довольны вашем CSS-селектором, скажите это всем.<br>
+<br>
+Это произойдёт в любом случае, даже с лучшими CSSупергеро(ин)ями, поэтому не стыдитесь этого.<br>
+<br>
+Подберите в вашей команде слово, подходящее для таких случаев, и придерживайтесь его на протяжении всего проекта.<br>
+<br>
+Лично я использую слово «HACK», потому что IDE Atom его автоматически подсвечивает.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.my-component</span> {
+  <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">7px</span>; <span class="hljs-comment">/* ХАК здесь: магическое число, нужное, чтобы компенсировать пробел */</span>
+}
+</code></pre><br>
+<br>
+<h2>15. Явные хаки (II)</h2><br>
+<br>
+Еще толковый вариант — собрать весь код со «странностями» в отдельный файл, <strong>shame.css</strong><br>
+<br>
+Опять же, Гарри Робертс подсказал<br>
+<br>
+<strong>Источник:</strong> <a href="http://csswizardry.com/2013/04/shame-css/">Гарри Робертс</a><br>
+<br>
+<h2>16. Старайтесь избегать более двух слов для одного имени</h2><br>
+<br>
+Название должно говорить само за себя, в одно-два слова, иначе код будет трудно поддерживать.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="css hljs"><span class="hljs-selector-class">.button</span> {
+  <span class="hljs-comment">/* Хорошо */</span>
+}
+<span class="hljs-selector-class">.dropdown-button</span> {
+  <span class="hljs-comment">/* Всё ещё хорошо */</span>
+}
+<span class="hljs-selector-class">.dropdown-button-part-one</span> {
+  <span class="hljs-comment">/* Хм, по-прежнему хорошо, но будет нечитаемым при добавлении дочернего элемента, например: */</span>
+}
+<span class="hljs-selector-class">.dropdown-button-part-one__button-admin</span> {
+  <span class="hljs-comment">/* Ой, всё!!! */</span>
+}
+</code></pre><br>
+<br>
+<h2>17. Используйте атрибут <code>data-state</code> для указания состояния компонента</h2><br>
+<br>
+Манипуляция состоянием — далеко не редкость. Это происходит насколько часто, что специальный атрибут для состояния экономит время и силы в долгосрочной перспективе.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'c-button c-button--warning is-active'</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- Не делайте этого --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'c-button c-button--warning'</span> <span class="hljs-attr">data-state</span>=<span class="hljs-string">'is-active'</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- Так-то лучше.
+  Я удалил объявление класа,
+  это гарантирует единственность состояния,
+  и для тех, кто использует Sass, это сделает код чище.--&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre><br>
+<br>
+<strong>Источник:</strong> к сожалению, не могу вспомнить, кто об этом писал, но его совет оказался весьма полезным.<br>
+<br>
+<h2>18. Используйте префиксы <code>has-</code> или <code>is-</code> для состояния</h2><br>
+<br>
+Манипуляция состоянием происходит очень часто (ещё раз). Поэтому придерживаться строгого соглашения наименования для состояния будет очень полезно.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml">.activated {
+  /* Не делайте этого. Я не совсем понимаю, о чём вы говорите? */
+}
+.is-activated {
+  /* Да, вы оформляете состояние. */
+}
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="https://github.com/mobify/mobify-code-style/tree/master/css/class-naming-conventions#state">оформление кода в Mobify</a><br>
+<br>
+<h2>19. Используйте дефис в качестве префикса при сочетании нескольких состояний</h2><br>
+<br>
+Нужно избегать сочетания состояний любой ценой. А когда это невозможно, на помощь придёт очень полезный трюк Бена Смифета. <br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn -color-red -size-large -shape-round"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre><br>
+<br>
+<strong>Источник:</strong> <a href="https://www.bensmithett.com/bem-modifiers-multiple-classes-vs-extend/">Бен Смифет</a><br>
+<br>
+<h2>20. При объявлении селектора в HTML придерживайтесь одиночных кавычек вместо двойных</h2><br>
+<br>
+Это упрощает чтение документа.<br>
+<br>
+<strong>Пример:</strong><br>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"c-button"</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ПЛОХОЙ ПРИМЕР: в нём используются " вместо '. В этом крошечном примере это не играет особой роли, но когда дело касается сотни селекторов в HTML-файле, одиночные кавычки — лучшая идея. --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'c-button'</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- Хорошо!--&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre><br>
+<br>
+<strong>Источник:</strong> я узнал это, когда работал с <a href="http://www.predicsis.com/team/">командой Predicsis</a><br>
+<br>
+<h2>21. Не следуйте правилам</h2><br>
+<br>
+Я попытался дать некоторые рекомендации, основанные на личном опыте и статьях, которые оказались для меня наиболее полезными.<br>
+<br>
+Я не говорю, что всё это пригодится и в вашем случае, поэтому мой наилучший совет: <br>
+<br>
+1) Постарайтесь улучшать своё именование классов, 2) соблюдайте его последовательно для данного проекта, 3) но избегайте переусложнения.<br>
+<br>
+Если правило вам не подходит, просто пропустите его<br>
+<br>
+Наслаждайтесь!<br>
+<br>
+<i>Особая благодарность <a href="https://twitter.com/HugoGiraudel">@HugoGiraudel</a>, <a href="https://twitter.com/kaelig">@kaelig</a> и <a href="https://twitter.com/gaetanbt">@gaetanbt</a> за их отзывы.</i></div>
+    
+    <div class="post__tags">
+  <ul class="tags icon_tag">
+      <li><a href="https://habrahabr.ru/search/?q=%5Bcss%5D&amp;target_type=posts" rel="tag">css</a>, </li>
+      <li><a href="https://habrahabr.ru/search/?q=%5Bhtml%5D&amp;target_type=posts" rel="tag">html</a>, </li>
+      <li><a href="https://habrahabr.ru/search/?q=%5Bcss-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D1%8B%5D&amp;target_type=posts" rel="tag">css-классы</a></li>
+  </ul>
+</div>
+  </div>
+</div>
+
+
+        </div>
+      </div>
+</body>
+</html>

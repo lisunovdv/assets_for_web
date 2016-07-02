@@ -1,0 +1,31 @@
+<style>
+.scrollup {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+    display: none;
+    text-indent: -9999px;
+    background: url('images/arrow_top.png') no-repeat;
+}
+.scrollup:hover{
+    cursor:pointer;
+}
+</style>
+<span class="scrollup"></span>
+<script>
+$(window).scroll(function () {
+      if ($(this).scrollTop() > 100) {
+          $('.scrollup').fadeIn();
+      } else {
+          $('.scrollup').fadeOut();
+      }
+  });
+  $('.scrollup').click(function () {
+      $("html, body").animate({
+          scrollTop: 0
+      }, 600);
+      return false;
+  });
+</script>

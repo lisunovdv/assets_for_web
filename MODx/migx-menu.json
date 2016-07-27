@@ -19,8 +19,8 @@
           "display":"",
           "sourceFrom":"config",
           "sources":"",
-          "inputOptionValues":"0 Level==0||1 Level==1||2 Level==2||3 Level==3||4 Level==4||5 Level==5",
-          "default":"0",
+          "inputOptionValues":"0 Level==tpl.menuLevel0||1 Level==tpl.menuLevel1||2 Level==tpl.menuLevel2||3 Level==tpl.menuLevel3||4 Level==tpl.menuLevel4||5 Level==tpl.menuLevel5",
+          "default":"tpl.menuLevel0",
           "useDefaultIfEmpty":1,
           "pos":1
         },
@@ -249,9 +249,9 @@
     },
     {
       "MIGX_id":5,
-      "header":"\u041f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0442\u044c",
+      "header":"\u0410\u043a\u0442\u0438\u0432\u043d\u044b\u0439",
       "dataIndex":"is_active",
-      "width":"",
+      "width":84,
       "sortable":"false",
       "show_in_grid":1,
       "customrenderer":"",

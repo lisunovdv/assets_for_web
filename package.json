@@ -1,0 +1,35 @@
+{
+  "name": "jdb.loc",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "exec": "^0.2.1",
+    "fontello-cli": "^0.4.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-fontello-config": "^1.2.1",
+    "gulp-html-extend": "^1.1.6",
+    "gulp-path": "^3.0.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-sass": "^2.3.2",
+    "gulp-sass-glob": "^1.0.6",
+    "gulp-sourcemaps": "^1.6.0",
+    "hover.css": "^2.0.2",
+    "materialize-css": "^0.97.7",
+    "node-sass": "^3.8.0",
+    "normalize.css": "^4.2.0",
+    "path": "^0.12.7",
+    "readmore-js": "^2.1.0"
+  },
+  "dependencies": {
+    "lodash": "^4.14.2"
+  }
+}

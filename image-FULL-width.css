@@ -1,3 +1,5 @@
+/* Как без выбивания из потока (без position: absolute) сделать баннер шире родителя и на всю ширину экрана */
+
 .full-width {
   width: 100vw;
   position: relative;

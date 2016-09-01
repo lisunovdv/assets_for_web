@@ -1,0 +1,63 @@
+[{
+  "caption": "Изображение",
+  "fields": [{
+    "field": "title",
+    "caption": "Заголовок",
+    "description": " Подпись к картинке. (Также используется для атрибута `alt` тега IMG)"
+  }, {
+    "field": "description",
+    "caption": "Описание",
+    "inputTVtype": "textarea",
+    "description": " Полное расширенное описание к картинке"
+  }, {
+    "field": "link",
+    "caption": "Ссылка",
+    "default":"#",
+    "description": " URL-адрес страницы. (Обычно при клике на картинку пользователя перебрасывает на этот адрес"
+  }, {
+    "field": "image",
+    "caption": "Картинка",
+    "inputTVtype": "image",
+    "description": " Путь к картинке"
+  }, {
+    "field": "active",
+    "caption": "Отображать?",
+    "inputTVtype": "listbox",
+    "inputOptionValues": "Да==1||Нет==0",
+    "default":1,
+    "description": " `Нет` - временно скрыть картинку и подписи к ней"
+  }]
+}]
+
+
+
+
+
+[{
+  "header": "Заголовок",
+  "sortable": "true",
+  "dataIndex": "title",
+  "editor":"this.textEditor"
+}, {
+  "header": "Описание",
+  "sortable": "true",
+  "dataIndex": "description",
+  "editor":"this.textEditor"
+}, {
+  "header": "Ссылка",
+  "sortable": "false",
+  "dataIndex": "link",
+  "editor":"this.textEditor"
+}, {
+  "header": "Картинка",
+  "sortable": "false",
+  "dataIndex": "image",
+  "renderer": "this.renderImage",
+  "editor":"this.textEditor"
+}, {
+  "header": "Отображается?",
+  "sortable": "false",
+  "dataIndex": "active",
+  "renderer":"this.renderCrossTick",
+  "editor":"this.textEditor"
+}]

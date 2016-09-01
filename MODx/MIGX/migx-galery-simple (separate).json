@@ -58,6 +58,5 @@
   "header": "Отображается?",
   "sortable": "false",
   "dataIndex": "active",
-  "renderer":"this.renderCrossTick",
-  "editor":"this.textEditor"
+  "renderer":"this.renderCrossTick"
 }]

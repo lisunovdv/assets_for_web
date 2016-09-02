@@ -54,12 +54,12 @@
                   {"icon":"","title":"01 AUG - 30 OCT","content":"Antlered deer entire season by bow only."},
               ]
             },
-            "start" : "1970-00-01",
-            "end": "1970-04-30"
+            "start" : "1970-01-01",
+            "end": "1970-06-30"
           },
           {
             "tooltip": {},
-            "start" : "1970-06-01",
+            "start" : "1970-07-01",
             "end": "1970-07-30"
           },
           {
@@ -72,7 +72,11 @@
   ]
 
    var options = {
-      timeline: { colorByRowLabel: true },
+      timeline: { 
+        colorByRowLabel: true,
+        // showRowLabels: false - Hog, Alligator
+      },
+      hAxis: { format:'555'},
       backgroundColor: '#fff',
       colors: [/*'#5a662a', '#a7c140', '#a59f5e', '#5ea597', '#82be9a'*/],
       tooltip: {isHtml: true}
@@ -133,7 +137,7 @@
 
 
 
-  google.charts.load("current", {packages:["timeline","bar"]});
+  google.charts.load("current", {/*'language': 'ru',*/packages:["timeline","bar"]});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
 

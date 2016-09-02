@@ -5,7 +5,7 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>https://raw.githubusercontent.com/andrewplummer/Sugar/2.0.0/dist/sugar.min.js<h1>
+  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="sugar.min.js"></script>
@@ -81,13 +81,16 @@
       
       var eventStr = _.template([
           '<%_.forEach(eventObject, function (e) {%>',
-              '<h3><%=e.title%></h3>',
-              '<div><%=e.content%></div>',
+              '<h3 class="tooltip-content-header"><%=e.title%></h3>',
+              '<div class="tooltip-content"><%=e.content%></div>',
           '<%})%>'
       ].join(''));
 
       var compiled = _.template([
         '<div class="chart-tooltip">',
+            '<div class="tooltip-header">',
+                tooltipData["season"],
+            '<div>',
             eventStr({ eventObject: tooltipData["events"]}),
         '<div>'
       ].join(''));
@@ -177,6 +180,12 @@
 </script>
 
 <div id="example5.1" style="height: 500px;width: 100%;"></div>
+
+
+<style>
+  
+
+</style>
 
 </body>
 </html>

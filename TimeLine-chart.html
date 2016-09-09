@@ -1,339 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 </head>
 <body>
-  
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<script src="sugar.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="sugar.js"></script>
+<script src="tags.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script type="text/javascript">
-//{"type":"text", "label":"Text Input", "name":"fff777","value":"Hello","placeholder":"My Placeholder"}
+    //{"type":"text", "label":"Text Input", "name":"fff777","value":"Hello","placeholder":"My Placeholder"}
 
-/*function SimpleRenderer(type, label, CSSclass) {
-  this.uniqueID = 0;
-  this.type = type || 'text';
-  this.label = Sugar.String.titleize(key);
-  return this;
-}*/
+    /*function SimpleRenderer(type, label, CSSclass) {
+     this.uniqueID = 0;
+     this.type = type || 'text';
+     this.label = Sugar.String.titleize(key);
+     return this;
+     }*/
 
-function Renderer (key, type, value, placeholder) {
-    if (!key) {return;}
-    this.uniqueID = 0;
-    this.prefix = 'migx-wp'
-    
-    this.type = type || 'text';
-    this.label = Sugar.String.titleize(key);
-    this.name = Sugar.String.parameterize( [this.prefix,key,++this.uniqueID].join('_') );
-    if (value) {
-      this.value = _.escape(value);
+    function Renderer(key, type, value, placeholder) {
+        if (!key) {
+            return;
+        }
+        this.prefix = 'migx-wp'
+
+        this.type = type || 'text';
+        this.label = Sugar.String.titleize(key+'');
+        this.name = Sugar.String.parameterize([this.prefix, key, _.uniqueId(this.prefix)].join('_'));
+        if (value) {
+            this.value = _.escape(value);
+        }
+        if (placeholder) {
+            this.placeholder = placeholder;
+        }
+        var resultObj = _.clone(this);
+        delete resultObj["prefix"];
+        return resultObj;
     }
-    if (placeholder) {this.placeholder = placeholder;}
-    var resultObj = _.clone(this);
-    delete resultObj["uniqueID"];
-    delete resultObj["prefix"];
-    return resultObj;
-}
-
-function ObjRenderer (obj, resultArr) {
-  var deth = 0;
-  var resultObjArr = resultArr || [];
-
-      for (var key in obj){
-
-          if ( _.isObject(obj[key]) ) {
-            debugger;
-            _.each(obj[key], function (element) {
-                ObjRenderer(element,resultObjArr);
-            })
-          }
 
 
-          var type;
-          switch (key) {
-            case 'start': 
-            case 'end':
-                type = 'date';
-                break;
-            case 'color':
-                type = 'color';
-                break;
-            default:
-                type = null;
-          }
-          if (type) {
-              console.log('key: '+key);
-              resultObjArr.push( new Renderer(key, type, obj[key]) );
-          }
-      }
+    function CommonRenderer(obj, parentKey, resultArr) {
+        var deth = 0;
+        var resultObjArr = ( _.isArray(resultArr) ) ? resultArr : [];
+
+        if (_.isObject(obj)) {
+            //resultObjArr.push(new Renderer(/*parentKey*/'OBJECT', 'h2'));
 
 
+            _.map(obj, function(elementORvalue, indexORkey, arrayORobject) {
+                resultObjArr.concat( CommonRenderer(elementORvalue, _.isArray(obj) ? parentKey : indexORkey, resultObjArr) );
+            });
+        } else {
+            resultObjArr.push(new Renderer('Parent: '+parentKey, 'h3'));
+            resultObjArr.push(new Renderer(parentKey, 'text', obj));
+        }
 
-  return resultObjArr;
-}
-  var acfCalendarData = [
-    {
-      "animal": "Hog",
-      "color": "#5a662a",
-      "params": [
-          {
-            "tooltip": {
-              "season":"Hog hunting archery season",
-              "events": [
-                  {"icon":"\e801","title":"DMU A3 – Aug. 1-16","content":"Antlered deer entire season by bow only."},
-                  {"icon":"","title":"01 AUG - 30 OCT","content":"Antlered deer entire season by bow only."},
-              ]
-            },
-            "start" : "1970-00-01",
-            "end": "1970-04-30"
-          },
-          {
-            "tooltip": {},
-            "start" : "1970-06-01",
-            "end": "1970-07-30"
-          },
-          {
-            "tooltip": {
-              "events": [
-                  {"icon":"\e801","title":"DMU A3 – Aug. 1-16","content":"Antlered deer entire season by bow only."},
-                  {"icon":"","title":"01 AUG - 30 OCT","content":"Antlered deer entire season by bow only."},
-              ]              
-            },
-            "start" : "1970-10-01",
-            "end": "1970-11-30"
-          }                  
-      ]
-    },
+        return resultObjArr;
+    }
+    var acfCalendarData = [
+        {
+            "animal": "Hog",
+            "color": "#5a662a",
+            "params": [
+                {
+                    "tooltip": {
+                        "season": "Hog hunting archery season",
+                        "events": [
+                            {
+                                "icon": "\e001",
+                                "title": "DMU A3 – Aug. 1-16",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                            {
+                                "icon": "\e002",
+                                "title": "01 AUG - 30 OCT",
+                                "content": "content 2."
+                            },
+                        ]
+                    },
+                    "start": "1970-00-01",
+                    "end": "1970-04-30"
+                },
+                {
+                    "tooltip": {},
+                    "start": "1970-06-01",
+                    "end": "1970-07-30"
+                },
+                {
+                    "tooltip": {
+                        "events": [
+                            {
+                                "icon": "\e201",
+                                "title": "DMU A3 – Aug. 1-16",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                            {
+                                "icon": "\e202",
+                                "title": "01 AUG - 30 OCT",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                            {
+                                "icon": "\e203",
+                                "title": "01 AUG - 30 OCT",
+                                "content": "Antlered deer entire season by bow only."
+                            }
+                        ]
+                    },
+                    "start": "1970-10-01",
+                    "end": "1970-11-30"
+                }
+            ]
+        },
 
-{
-      "animal": "Alligator",
-      "color": "#a7c140",
-      "params": [
-          {
-            "tooltip": {
-              "season":"Hog hunting archery season",
-              "events": [
-                  {"icon":"\e801","title":"DMU A3 – Aug. 1-16","content":"Antlered deer entire season by bow only."},
-                  {"icon":"","title":"01 AUG - 30 OCT","content":"Antlered deer entire season by bow only."},
-              ]
-            },
-            "start" : "1970-01-01",
-            "end": "1970-06-30"
-          },
-          {
-            "tooltip": {
-              "season":"Alligator hunting archery season"
-            },
-            "start" : "1970-07-01",
-            "end": "1970-07-30"
-          },
-          {
-            "tooltip": {
-              "events": [
-                  {"icon":"\e801","title":"DMU A3 – Aug. 1-16","content":"Antlered deer entire season by bow only."}
-              ]              
-            },
-            "start" : "1970-10-01",
-            "end": "1970-11-30"
-          }                  
-      ]
-    }    
-  ]
+        {
+            "animal": "Alligator",
+            "color": "#a7c140",
+            "params": [
+                {
+                    "tooltip": {
+                        "season": "Hog hunting archery season",
+                        "events": [
+                            {
+                                "icon": "\e801",
+                                "title": "DMU A3 – Aug. 1-16",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                            {
+                                "icon": "",
+                                "title": "01 AUG - 30 OCT",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                        ]
+                    },
+                    "start": "1970-01-01",
+                    "end": "1970-06-30"
+                },
+                {
+                    "tooltip": {
+                        "season": "Alligator hunting archery season"
+                    },
+                    "start": "1970-07-01",
+                    "end": "1970-07-30"
+                },
+                {
+                    "tooltip": {
+                        "events": [
+                            {
+                                "icon": "\e801",
+                                "title": "DMU A3 – Aug. 1-16",
+                                "content": "Antlered deer entire season by bow only."
+                            }
+                        ]
+                    },
+                    "start": "1970-10-01",
+                    "end": "1970-11-30"
+                }
+            ]
+        }
+    ]
 
-   var options = {
-      timeline: { 
-        colorByRowLabel: true,
-        // showRowLabels: false - Hog, Alligator
-      },
-      hAxis: { format:'555'},
-      backgroundColor: '#fff',
-      colors: [/*'#5a662a', '#a7c140', '#a59f5e', '#5ea597', '#82be9a'*/],
-      tooltip: {isHtml: true}
+    var options = {
+        timeline: {
+            colorByRowLabel: true,
+            // showRowLabels: false - Hog, Alligator
+        },
+        hAxis: {format: '555'},
+        backgroundColor: '#fff',
+        colors: [/*'#5a662a', '#a7c140', '#a59f5e', '#5ea597', '#82be9a'*/],
+        tooltip: {isHtml: true}
     };
     function makeToolTipHTML(tooltipData) {
-      if (!tooltipData["season"] && !tooltipData["events"]) {
-        return '';
-      }
+        if (!tooltipData["season"] && !tooltipData["events"]) {
+            return '';
+        }
 
-      var eventStr = _.template([
-          '<%_.forEach(eventObject, function (e) {%>',
-              '<div class="tooltip-event">',
-                '<h3 class="tooltip-event-header"><%=e.title%></h3>',
-                '<div class="tooltip-event-content"><%=e.content%></div>',
-              '</div>',
-          '<%})%>'
-      ].join(''));
+        var eventStr = _.template([
+            '<%_.forEach(eventObject, function (e) {%>',
+            '<div class="tooltip-event">',
+            '<h3 class="tooltip-event-header"><%=e.title%></h3>',
+            '<div class="tooltip-event-content"><%=e.content%></div>',
+            '</div>',
+            '<%})%>'
+        ].join(''));
 
-      var tooltipHeaderTitle = tooltipData["season"] ? [
-          '<div class="tooltip-header">',
-              tooltipData["season"],
-          '</div>'].join('') : '';
+        var tooltipHeaderTitle = tooltipData["season"] ? [
+            '<div class="tooltip-header">',
+            tooltipData["season"],
+            '</div>'].join('') : '';
 
-      var compiled = _.template([
-        '<div class="chart-tooltip">',
+        var compiled = _.template([
+            '<div class="chart-tooltip">',
             tooltipHeaderTitle,
             '<div class="tooltip-content">',
-              tooltipData["events"] ? eventStr({ eventObject: tooltipData["events"]}) : '',
+            tooltipData["events"] ? eventStr({eventObject: tooltipData["events"]}) : '',
             '</div>',
-        '<div>'
-      ].join(''));
+            '<div>'
+        ].join(''));
 
-      return compiled(tooltipData);
+        return compiled(tooltipData);
     }
 
-    function thisDateFormat (dateStr) {
-      return Sugar.Date.format( Sugar.Date.create(dateStr), '{dd} {Mon}');
+    function thisDateFormat(dateStr) {
+        return Sugar.Date.format(Sugar.Date.create(dateStr), '{dd} {Mon}');
     }
     function generateBarTitle(startDateStr, endDateStr) {
-      return  Sugar.Date.format( startDateStr, '{dd} {Mon}') + " - " + Sugar.Date.format( endDateStr, '{dd} {Mon}');
+        return Sugar.Date.format(startDateStr, '{dd} {Mon}') + " - " + Sugar.Date.format(endDateStr, '{dd} {Mon}');
     }
 
     var dataModel = (function generateData(data) {
-        if (!_.isArray(data) ) {
-          console.log('`Data` is not valid array. Dump: '+data);
-          return;
+        if (!_.isArray(data)) {
+            console.log('`Data` is not valid array. Dump: ' + data);
+            return;
         }
 
         var result = [];
-        _.each(data, function(element){
+        _.each(data, function (element) {
 
-          options["colors"].push(element["color"]);
+            options["colors"].push(element["color"]);
 
-            _.each(element["params"], function(param){
+            _.each(element["params"], function (param) {
                 var startDate = Sugar.Date.create(param["start"]);
                 var endDate = Sugar.Date.create(param["end"]);
                 result.push([
-                  element['animal'],
-                  generateBarTitle(startDate,endDate),
-                  makeToolTipHTML(param["tooltip"]),
-                  startDate,
-                  endDate
+                    element['animal'],
+                    generateBarTitle(startDate, endDate),
+                    makeToolTipHTML(param["tooltip"]),
+                    startDate,
+                    endDate
                 ]);
             });
         });
         return result;
-    })(acfCalendarData);  
+    })(acfCalendarData);
 
 
+    google.charts.load("current", {/*'language': 'ru',*/packages: ["timeline", "bar"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
 
-  google.charts.load("current", {/*'language': 'ru',*/packages:["timeline","bar"]});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
+        var container = document.getElementById('example5.1');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn({type: 'string', id: 'Animal'});
+        dataTable.addColumn({type: 'string', id: 'Season'});
+        dataTable.addColumn({type: 'string', 'role': 'tooltip', 'p': {'html': true}});
+        dataTable.addColumn({type: 'date', id: 'Start'});
+        dataTable.addColumn({type: 'date', id: 'End'});
+        /*dataTable.addRows([
+         [ 'Hog', new Date(0,3,1,0,0,0) + '-' + new Date(0,4,30,0,0,0),     makeToolTipHTML(),  new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0) ],
+         [ 'Hog', 'Intermediate JavaScript', makeToolTipHTML(),    new Date(0,8,1,0,0,0),  new Date(0,9,30,0,0,0)  ],
+         [ 'Hog', 'Advanced JavaScript',   makeToolTipHTML(),      new Date(0,10,20,0,0,0),  new Date(0,11,30,0,0,0)  ],
 
-    var container = document.getElementById('example5.1');
-    var chart = new google.visualization.Timeline(container);
-    var dataTable = new google.visualization.DataTable();
-    dataTable.addColumn({ type: 'string', id: 'Animal' });
-    dataTable.addColumn({ type: 'string', id: 'Season' });
-    dataTable.addColumn({type: 'string', 'role': 'tooltip', 'p': {'html': true}});
-    dataTable.addColumn({ type: 'date', id: 'Start' });
-    dataTable.addColumn({ type: 'date', id: 'End' });
-    /*dataTable.addRows([
-      [ 'Hog', new Date(0,3,1,0,0,0) + '-' + new Date(0,4,30,0,0,0),     makeToolTipHTML(),  new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0) ],
-      [ 'Hog', 'Intermediate JavaScript', makeToolTipHTML(),    new Date(0,8,1,0,0,0),  new Date(0,9,30,0,0,0)  ],
-      [ 'Hog', 'Advanced JavaScript',   makeToolTipHTML(),      new Date(0,10,20,0,0,0),  new Date(0,11,30,0,0,0)  ],
+         [ 'Alligator',   'Beginning Google Charts',  makeToolTipHTML(),   new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Alligator',   'Intermediate Google Charts', makeToolTipHTML(), new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Alligator',   'Advanced Google Charts',  makeToolTipHTML(),    new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
 
-      [ 'Alligator',   'Beginning Google Charts',  makeToolTipHTML(),   new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
-      [ 'Alligator',   'Intermediate Google Charts', makeToolTipHTML(), new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
-      [ 'Alligator',   'Advanced Google Charts',  makeToolTipHTML(),    new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Bird and waterfowl',   'Beginning Google Charts', makeToolTipHTML(),    new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Bird and waterfowl',   'Intermediate Google Charts', makeToolTipHTML(), new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
 
-      [ 'Bird and waterfowl',   'Beginning Google Charts', makeToolTipHTML(),    new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
-      [ 'Bird and waterfowl',   'Intermediate Google Charts', makeToolTipHTML(), new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Turkey',   'Beginning Google Charts', makeToolTipHTML(),    new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Turkey',   'Intermediate Google Charts', makeToolTipHTML(), new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Turkey',   'Advanced Google Charts',     makeToolTipHTML(), new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
 
-      [ 'Turkey',   'Beginning Google Charts', makeToolTipHTML(),    new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
-      [ 'Turkey',   'Intermediate Google Charts', makeToolTipHTML(), new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
-      [ 'Turkey',   'Advanced Google Charts',     makeToolTipHTML(), new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Whitetail deer',   'Beginning Google Charts',   makeToolTipHTML(),  new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Whitetail deer',   'Intermediate Google Charts',makeToolTipHTML(),  new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
+         [ 'Whitetail deer',   'Advanced Google Charts',    makeToolTipHTML(),  new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ]
 
-      [ 'Whitetail deer',   'Beginning Google Charts',   makeToolTipHTML(),  new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
-      [ 'Whitetail deer',   'Intermediate Google Charts',makeToolTipHTML(),  new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ],
-      [ 'Whitetail deer',   'Advanced Google Charts',    makeToolTipHTML(),  new Date(0,3,1,0,0,0),  new Date(0,4,30,0,0,0)  ]
+         ]);*/
 
-      ]);*/
-
-    dataTable.addRows(dataModel);
-
+        dataTable.addRows(dataModel);
 
 
-
- 
-
-    chart.draw(dataTable, options);
-  }
+        chart.draw(dataTable, options);
+    }
 
 
-jQuery(document).ready(function () {
-  jQuery('#2').prepend(makeToolTipHTML(acfCalendarData[0] ["params"][0]["tooltip"]));
-})
+    jQuery(document).ready(function () {
+        jQuery('#2').prepend(makeToolTipHTML(acfCalendarData[0] ["params"][0]["tooltip"]));
+    })
 
 
-/* ================= BacKend ============= */
+    /* ================= BacKend ============= */
 
-function getForm(element) {
-    var formProto = loadFormProto();
+    function getForm(element) {
+        var formProto = loadFormProto();
 
-    /*var fields = _.template([
-          '<%_.forEach(fieldRenderers, function (e) {%>',
-              '<div class="tooltip-event">',
-                '<h3 class="tooltip-event-header"><%=e.title%></h3>',
-                '<div class="tooltip-event-content"><%=e.content%></div>',
-              '</div>',
-          '<%})%>'
-      ].join(''));*/
+        /*var fields = _.template([
+         '<%_.forEach(fieldRenderers, function (e) {%>',
+         '<div class="tooltip-event">',
+         '<h3 class="tooltip-event-header"><%=e.title%></h3>',
+         '<div class="tooltip-event-content"><%=e.content%></div>',
+         '</div>',
+         '<%})%>'
+         ].join(''));*/
 
-    var thisForm = _.template([
-        '<form class="wp-migx-form chart-tooltip" style="padding:1rem;">',
-            '<h3>'+'Form Name'+'</h3>',
-              simpleRenderer('email','test@mail.com','E-mail','Type your e-mail'),
-              '<div class="wp-migx-row">',
-                '<button>'+'Cancel'+'</button>',
-                '<button>'+'OK'+'</button>',
+        var thisForm = _.template([
+            '<form class="wp-migx-form chart-tooltip" style="padding:1rem;">',
+            '<h3>' + 'Form Name' + '</h3>',
+            simpleRenderer('email', 'test@mail.com', 'E-mail', 'Type your e-mail'),
+            '<div class="wp-migx-row">',
+            '<button>' + 'Cancel' + '</button>',
+            '<button>' + 'OK' + '</button>',
             '</div>',
-        '<form>'
-      ].join(''));
+            '<form>'
+        ].join(''));
 
-    jQuery('#3').append(thisForm);
-}
+        jQuery('#3').append(thisForm);
+    }
 
-function loadFormProto () {
-   
-}
+    function loadFormProto() {
 
-function simpleRenderer (inputVar,value,label,placeholder) {
-  this.id = 0;
-  this.prefix = 'wp-migx';
-  this.label = label || Sugar.String.titleize(inputVar);
-  this.placeholder = placeholder ? 'placeholder="'+placeholder+'"' : '';
+    }
 
-  var thisIdentifier = Sugar.String.parameterize( [this.prefix,inputVar,++this.id].join('_') );
-  this.input = {
-    type: 'text',
-    id: thisIdentifier,
-    name: thisIdentifier + '_name'
-  };
+    function simpleRenderer(inputVar, value, label, placeholder) {
+        this.id = 0;
+        this.prefix = 'wp-migx';
+        this.label = label || Sugar.String.titleize(inputVar);
+        this.placeholder = placeholder ? 'placeholder="' + placeholder + '"' : '';
 
-  inputHtml = [
-    '<input',
-        'type="'+this.input.type+'"',
-        'name="'+this.input.name+'"',
-        this.placeholder,
-        'id="'+this.input.id+'"',
-        'value="'+value+'"',
-        'class="wp-migx-input">',
-  ].join(' ');
+        var thisIdentifier = Sugar.String.parameterize([this.prefix, inputVar, ++this.id].join('_'));
+        this.input = {
+            type: 'text',
+            id: thisIdentifier,
+            name: thisIdentifier + '_name'
+        };
 
-  this.view = [
-    '<div class="wp-migx-row">',
-        '<label for="'+this.input.name+'" class="wp-migx-label">'+this.label+'</label>',
-        inputHtml,
-    '</div>'
-  ].join('');
+        inputHtml = [
+            '<input',
+            'type="' + this.input.type + '"',
+            'name="' + this.input.name + '"',
+            this.placeholder,
+            'id="' + this.input.id + '"',
+            'value="' + value + '"',
+            'class="wp-migx-input">',
+        ].join(' ');
 
-  return this.view;
-}
+        this.view = [
+            '<div class="wp-migx-row">',
+            '<label for="' + this.input.name + '" class="wp-migx-label">' + this.label + '</label>',
+            inputHtml,
+            '</div>'
+        ].join('');
+
+        return this.view;
+    }
 </script>
 
 <div id="example5.1" style="height: 320px;width: 100%;"></div>
@@ -345,67 +360,82 @@ function simpleRenderer (inputVar,value,label,placeholder) {
 <link rel="stylesheet" type="text/css" href="chart-style.css">
 
 
-  <link rel="stylesheet" type="text/css" media="screen" href="https://formbuilder.online/assets/css/form-builder.min.css">
-  <div id="build-render"></div>
-  <div id="build-wrap"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-  <script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
-  <script src="https://formbuilder.online/assets/js/form-render.js"></script>
-  <script>
-jQuery(document).ready(function($) {
+<link rel="stylesheet" type="text/css" media="screen" href="https://formbuilder.online/assets/css/form-builder.min.css">
+<div id="build-render"></div>
+<div id="build-wrap"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
+<script src="https://formbuilder.online/assets/js/form-render.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
 
-var someEntity =     {
-      "animal": "Hog",
-      "color": "#5a662a",
-      "params": [
-          {
-            "tooltip": {
-              "season":"Hog hunting archery season",
-              "events": [
-                  {"icon":"\e801","title":"DMU A3 – Aug. 1-16","content":"Antlered deer entire season by bow only."},
-                  {"icon":"","title":"01 AUG - 30 OCT","content":"Antlered deer entire season by bow only."},
-              ]
-            },
-            "start" : "1970-00-01",
-            "end": "1970-04-30"
-          },
-          {
-            "tooltip": {},
-            "start" : "1970-06-01",
-            "end": "1970-07-30"
-          },
-          {
-            "tooltip": {
-              "events": [
-                  {"icon":"\e801","title":"DMU A3 – Aug. 1-16","content":"Antlered deer entire season by bow only."},
-                  {"icon":"","title":"01 AUG - 30 OCT","content":"Antlered deer entire season by bow only."},
-              ]              
-            },
-            "start" : "1970-10-01",
-            "end": "1970-11-30"
-          }                  
-      ]
-    };
+        var someEntity = {
+            "animal": "Hog",
+            "color": "#5a662a",
+            "params": [
+                {
+                    "tooltip": {
+                        "season": "Hog hunting archery season",
+                        "events": [
+                            {
+                                "icon": "\e801",
+                                "title": "DMU A3 – Aug. 1-16",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                            {
+                                "icon": "",
+                                "title": "01 AUG - 30 OCT",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                        ]
+                    },
+                    "start": "1970-00-01",
+                    "end": "1970-04-30"
+                },
+                {
+                    "tooltip": {},
+                    "start": "1970-06-01",
+                    "end": "1970-07-30"
+                },
+                {
+                    "tooltip": {
+                        "events": [
+                            {
+                                "icon": "\e801",
+                                "title": "DMU A3 – Aug. 1-16",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                            {
+                                "icon": "",
+                                "title": "01 AUG - 30 OCT",
+                                "content": "Antlered deer entire season by bow only."
+                            },
+                        ]
+                    },
+                    "start": "1970-10-01",
+                    "end": "1970-11-30"
+                }
+            ]
+        };
 
-  var formDataStr = JSON.stringify( ObjRenderer(someEntity) );
-  console.log(formDataStr);
-  var fbTemplate = document.getElementById('build-render'),
-    options = {
-      //formData: '[{"type":"text", "label":"Text Input", "name":"fff777","value":"Hello","placeholder":"My Placeholder"}]',
-      formData: formDataStr,
-      dataType: 'json'
-    };
-  $(fbTemplate).formRender(options);
-  $(document.getElementById('build-wrap')).formBuilder(options);
+        var formDataStr = JSON.stringify(CommonRenderer(acfCalendarData, 'Calendar Form'));
+        console.log(formDataStr);
+        var fbTemplate = document.getElementById('build-render'),
+                options = {
+                    //formData: '{"MyForm":[{"type":"text", "label":"Text Input", "name":"fff777","value":"Hello","placeholder":"My Placeholder"}]}',
+                    formData: '[{"type":"text", "label":"Text Input", "name":"fff777","value":"Hello","placeholder":"My Placeholder"}]',
+                    //formData: formDataStr,
+                    dataType: 'json'
+                };
+        $(fbTemplate).formRender(options);
+        $(document.getElementById('build-wrap')).formBuilder(options);
 
 
+    });
 
-});
 
-
-  </script>
-
+</script>
 
 
 </body>

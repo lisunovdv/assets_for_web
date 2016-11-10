@@ -14,7 +14,7 @@ gulp.task('sass', function () {
   return gulp.src('../domriyecommerce/assets/sass/main.scss')
   .pipe(sourcemaps.init())
   .pipe(sass({
-    importer: compass,
+    //importer: compass,
     sourceMap: true,
     outputStyle: 'expanded'
   }).on('error', sass.logError))

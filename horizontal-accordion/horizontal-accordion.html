@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script>
+$(document).ready(function () {
+	var accordion = $('.accordion');
+	accordion.children().first().addClass('active');
+	accordion.children().click(function () {
+		accordion.children().removeClass('active');
+		$(this).addClass('active');
+	})
+});
+  </script>
+  <style>
+.container {
+	margin-top: 7rem;
+	margin-bottom: 7rem;
+}
+
+.accordion-item {
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/* Accordion required styles */
+.accordion {
+	display: flex;
+}
+
+.accordion-item {
+	width: 135px;
+	height: 300px;
+	transition: width 1s;
+}
+
+.accordion-item.active {
+	width: 100%;
+	transition: width 1s;
+}
+  </style>
+</head>
+<body>
+	<div class="container">
+		<ul class="accordion">
+			<li class="accordion-item" style="background-image: url(http://placehold.it/180x135/000000/ffffff)">Slide 1</li>
+			<li class="accordion-item" style="background-image: url(http://placehold.it/180x135/2ecc71/ecf0f1)">Slide 1</li>
+			<li class="accordion-item" style="background-image: url(http://placehold.it/280x100/2c3e50/3498db&text=html5.by+Rocks!)">Slide 1</li>
+			<li class="accordion-item" style="background-image: url(http://placehold.it/180x135/000000/ffffff)">Slide 1</li>
+			<li class="accordion-item" style="background-image: url(http://placehold.it/180x135/2ecc71/ecf0f1)">Slide 1</li>
+			<li class="accordion-item" style="background-image: url(http://placehold.it/280x100/2c3e50/3498db&text=html5.by+Rocks!)">Slide 1</li>
+		</ul>
+	</div>
+</body>
+</html>

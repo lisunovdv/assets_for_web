@@ -23,23 +23,44 @@ $(document).ready(function () {
 
 .accordion-item {
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 100%;
 }
 
-/* Accordion required styles */
+
+/* Accordion plugin styles */
+
 .accordion {
 	display: flex;
+	flex-direction: column;
 }
 
 .accordion-item {
-	width: 135px;
-	height: 300px;
-	transition: width 1s;
+	height: 100px;
+	transition: height 0.5s;
 }
 
 .accordion-item.active {
-	width: 100%;
-	transition: width 1s;
+	height: 300px;
+	transition: height 0.5s;
+}
+
+@media screen and (min-width:992px) {
+	.accordion {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.accordion-item {
+		width: 135px;
+		height: 300px;
+		transition: width 0.5s;
+	}
+
+	.accordion-item.active {
+		width: 100%;
+		transition: width 0.5s;
+	}
+
 }
   </style>
 </head>

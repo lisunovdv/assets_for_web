@@ -1,6 +1,10 @@
 [[*description:notempty=`<p>[[*description]]</p>`]]
 [[*tv_tabs:isnot=``:then=``]]
 
+
+[[%5:babelid]]
+
+
 //richtext TO plain text
 [[+title:strip_tags=``:stripString=`"`:strip:htmlent]]
 

@@ -14,3 +14,13 @@ function temposSendGoal(goal) {
     }
     console.log(logData);
 }
+
+
+$( document ).ajaxSuccess(function( event, request, settings ) {
+    console.log('event:::::::::::::::'+event);
+    console.log(event);
+    console.log('request:::::::::::::::'+request);
+    console.log(request);
+    console.log('settings:::::::::::::::'+settings);
+    console.log(settings);
+}); 

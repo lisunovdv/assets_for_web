@@ -9,8 +9,12 @@ function temposSendGoal(goal) {
         logData['yandex_metrika'] = goal;
     }
     if (typeof fbq == 'function') {
-        fbq('track', 'Lead');
-        logData['facebook_pixel'] = goal;
+        var fbCustomData = {
+            content_name:goal
+        };
+        fbq('track', 'Lead', fbCustomData);
+        fbCustomData.track = 'Lead';
+        logData['facebook_pixel'] = fbCustomData;
     }
     console.log(logData);
 }

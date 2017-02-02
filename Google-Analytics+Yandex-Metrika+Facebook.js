@@ -29,6 +29,13 @@ $( document ).ajaxSuccess(function( event, request, settings ) {
     console.log(settings);
 }); 
 
+// Widget.Gen после успешной отправки
+<script type="text/javascript">
+function showSuccess(id) {
+     jQuery('.modal').modal('hide'); jQuery('#thanksModal').modal('show');
+}
+</script>
+
 
 /*
 Задача:

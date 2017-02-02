@@ -10,7 +10,7 @@ function temposSendGoal(goal) {
     }
     if (typeof fbq == 'function') {
         fbq('track', 'Lead', {content_name:goal});
-        logData['facebook_pixel'] = 'FB:track ' + 'Lead {content_name: ' + goal +'}';
+        logData['facebook_pixel'] = 'track ' + 'Lead {content_name: ' + goal +'}';
     }
     console.log(logData);
 }

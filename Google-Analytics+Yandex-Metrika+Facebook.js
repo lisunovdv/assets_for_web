@@ -2,19 +2,15 @@ function temposSendGoal(goal) {
     var logData = {};
     if (typeof ga == 'function') {
         ga('send', 'event', goal, 'send');
-        logData['google_analytics'] = goal;
+        logData['google_analytics'] = goal + ' - send';
     }
     if (typeof window.yaCounter00000000.reachGoal == 'function') {
         window.yaCounter00000000.reachGoal(goal);
         logData['yandex_metrika'] = goal;
     }
     if (typeof fbq == 'function') {
-        var fbCustomData = {
-            content_name:goal
-        };
-        fbq('track', 'Lead', fbCustomData);
-        fbCustomData.track = 'Lead';
-        logData['facebook_pixel'] = fbCustomData;
+        fbq('track', 'Lead', {content_name:goal});
+        logData['facebook_pixel'] = 'FB:track ' + 'Lead {content_name: ' + goal +'}';
     }
     console.log(logData);
 }

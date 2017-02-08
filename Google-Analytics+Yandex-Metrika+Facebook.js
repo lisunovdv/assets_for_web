@@ -2,7 +2,7 @@ function temposSendGoal(goal) {
     var logData = {};
     if (typeof ga == 'function') {
         ga('send', 'event', goal, 'send');
-        logData['google_analytics'] = goal + ' - send';
+        logData['google_analytics'] = {gaGoal: goal,gaEvent:'send'};
     }
     if (typeof window.yaCounter00000000.reachGoal == 'function') {
         window.yaCounter00000000.reachGoal(goal);
@@ -10,11 +10,14 @@ function temposSendGoal(goal) {
     }
     if (typeof fbq == 'function') {
         fbq('track', 'Lead', {content_name:goal});
-        logData['facebook_pixel'] = 'track ' + 'Lead {content_name: ' + goal +'}';
+        logData['facebook_pixel'] = {'track':'Lead',content_name:goal};
+    }
+    if (dataLayer) {
+        logData['google_tag_manager'] = {'send': goal};
+        dataLayer.push({'send': goal});
     }
     console.log(logData);
 }
-
 
 $( document ).ajaxSuccess(function( event, request, settings ) {
     console.log('event:::::::::::::::'+event);

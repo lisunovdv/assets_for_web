@@ -4,7 +4,7 @@ function temposSendGoal(goal) {
         ga('send', 'event', goal, 'send');
         logData['google_analytics'] = {gaGoal: goal,gaEvent:'send'};
     }
-    if (typeof window.yaCounter00000000.reachGoal == 'function') {
+    if (window.yaCounter00000000 && typeof window.yaCounter00000000.reachGoal == 'function') {
         window.yaCounter00000000.reachGoal(goal);
         logData['yandex_metrika'] = goal;
     }

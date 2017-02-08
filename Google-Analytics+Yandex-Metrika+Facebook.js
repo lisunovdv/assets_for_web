@@ -19,6 +19,19 @@ function temposSendGoal(goal) {
     console.log(logData);
 }
 
+
+switch (formId) {
+    case '***':
+        goal = 'zakazat'
+        break;
+    case '***':
+        goal = 'zakazat'
+        break;
+    case '***':
+        goal = 'zakazat'
+        break;
+}
+
 $( document ).ajaxSuccess(function( event, request, settings ) {
     console.log('event:::::::::::::::'+event);
     console.log(event);

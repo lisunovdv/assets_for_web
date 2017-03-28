@@ -12,7 +12,7 @@ function temposSendGoal(goal) {
         fbq('track', 'Lead', {content_name:goal});
         logData['facebook_pixel'] = {'track':'Lead',content_name:goal};
     }
-    if (dataLayer) {
+    if (typeof dataLayer != 'undefined' && Object.prototype.toString.call( dataLayer ) === '[object Array]' )) {
         logData['google_tag_manager'] = {'event': goal};
         dataLayer.push({'event': goal});
     }

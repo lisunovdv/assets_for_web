@@ -7,6 +7,25 @@ HTML
 <a onclick="Share.odnoklassniki('URL','DESC')"> {шарь меня полностью}</a>
 <a onclick="Share.twitter('URL','TITLE')"> {шарь меня полностью}</a>
 
+<SASS / SCSS>
+  @each $soc, $soc-color in (
+          'youtube':#bb0000,
+          'facebook':#3b5998,
+          'vk':#45668e,
+          'google-plus':#dd4b39,
+          'twitter':#55acee,
+          'instagram':#125688,
+          'odnoklassniki':#ed812b,
+          'vimeo':#aad450,
+          'pinterest':#cb2027,
+          'tumblr':#32506d
+  ) {
+    &.soc-bg-#{$soc}:hover {
+      background-color: $soc-color;
+    }
+  }
+<SASS / SCSS>
+
 JS
 Share = {
 	vkontakte: function(purl, ptitle, pimg, text) {

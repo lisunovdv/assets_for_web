@@ -1,0 +1,84 @@
+@function capitalize($string) {
+    @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2);
+}
+
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+@mixin font-generator ($font-name,$font-path:'',$weights-remove:'',$extensions:'',$headset:'sans-serif') {
+    @if ($font-path == '') {
+        $font-path:'../fonts/'+$font-name + '/';
+    }
+
+    @if ($extensions == '') {
+        $extensions: (
+                'eot':'',
+                'eot?#iefix':'embedded-opentype',
+                'woff':'woff',
+                'woff2':'woff2',
+                'ttf':'truetype',
+                'svg#'+$font-name:'svg'
+        );
+    }
+
+
+
+    $weights-names: (
+            100:    'Thin',
+            200:    'Extra Light',
+            300:    'Light',
+            400:    'Regular',
+            500:    'Medium',
+            600:    'Semi Bold',
+            700:    'Bold',
+            800:    'Extra Bold',
+            900:    'Black'
+    ) !default;
+
+    //$headset: 'sans-serif' !default;
+
+    @if ($weights-remove !='') {
+        $weights-names: map-remove($weights-names,$weights-remove);
+       @each $w in $weights-remove {
+            $weights-names: map-remove($weights-names,$w);
+       }
+    }
+
+    //map-remove($weights-names,$weights)
+
+    @each $weight-number, $weight-text in $weights-names {
+        @font-face {
+            font-family: $font-name;
+            font-weight: $weight-number;
+            font-style: normal;
+            $src:'';
+            @each $ext,$type in $extensions {
+                $url: $font-path+$font-name+'-'+str-replace(capitalize($weight-text),' ')+'.'+$ext;
+                @if $ext == 'eot' {
+                    src: local($font-name+ ' ' + $weight-text),
+                    local($font-name+ '-' + str-replace($weight-text,' ')),
+                    url($url);
+                } @else {
+                    $format:'';
+                    @if ($type) {
+                        $format: 'format("' + $type +'")';
+                    }
+                    $src: $src + 'url('+$url+') '+$format;
+                }
+                $src: $src + ',';
+            }
+            $src: str-slice($src,2);
+            $src: str-slice($src,1,-2);
+            src: #{$src};
+        }
+    }
+}
+
+@include font-generator('Roboto',$weights-remove:(100,200,300));

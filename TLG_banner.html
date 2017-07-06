@@ -1,0 +1,70 @@
+<li class="slide slide1" style="width: 1600px;">
+    <div class="banner-content-wrapper">
+        <div class="banner-text">FALL WINTER COLLECTION 01</div>
+        <a href="http://pulsarfour03-alliance-prtnr-eu05-dw.demandware.net/s/SiteGenesis/womens/clothing/?lang=default" class="hp-main_slider-button g-button-white">SHOP WOMAN</a>
+        <a href="http://pulsarfour03-alliance-prtnr-eu05-dw.demandware.net/s/SiteGenesis/mens/clothing/?lang=default" class="hp-main_slider-button g-button-white">SHOP MAN</a>
+    </div>
+    <img src="http://pulsarfour03-alliance-prtnr-eu05-dw.demandware.net/on/demandware.static/-/Library-Sites-SiteGenesisSharedLibrary/default/dw48e83e07/images/homepage/shot07052-w2-f5-flipped.jpg" alt="Mens Suits">
+</li>
+
+<style type="text/css">
+#homepage-slides .slide {
+    display:inline-block;
+    text-align: center;
+}
+
+/* My new div wrapper */
+.banner-content-wrapper {
+    position: absolute;
+    bottom: 10%;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* Buttons - use .g-button ore something in _buttons.scss  + need to find `.g-button-white` */
+
+
+/* Scroll Down */
+a.hp-scroll_down {
+    position: absolute;
+    right: 35px;
+    bottom: 45px;
+    overflow: visible;
+}
+
+.hp-scroll_down-text {
+    display: inline-block;
+    transform: rotateZ(-90deg);
+    transform-origin: 6px 0;
+    background: lightgreen;
+}
+
+.hp-scroll_down-icon {
+    display: block;
+    width: 26px;
+    height: 38px;
+    background: red;
+}pointer-events: 
+</style>
+
+
+<!-- Scroll Down -->
+<a href="#next-section" class="hp-scroll_down" style="
+    min-width: 178px;
+    min-height: 200px;
+"><span class="hp-scroll_down-text">Scroll down</span><i class="hp-scroll_down-icon"></i></a>
+<div id="next-setction">Next Section</div>
+<script type="text/javascript">
+    $('a[href^="#"]').on('click', function(event) {
+    var target = $(this.getAttribute('href'));
+    if( target.length ) {
+        event.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: target.offset().top
+        }, 1000);
+    }
+});
+</script>
+
+
